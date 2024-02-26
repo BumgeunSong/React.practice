@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>클릭 0번</span>
+    <button id="click_me">Click me</button>
+</body>
+<script>
+    const button = document.getElementById("click_me")
+    const span = document.querySelector("span")
+
+    let counter = 0;
+    function handleClick() {
+        console.log("I have been clicked")
+        counter += 1
+        span.innerText = `클릭 ${counter}번`;
+    }
+
+    button.addEventListener("click", handleClick)
+</script>
+</html>
