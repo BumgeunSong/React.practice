@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <title>Document</title>
+    <title>React Counter</title>
 </head>
 <body>
     <div id="root"></div>
@@ -13,7 +13,12 @@
 <script>
     const container = document.getElementById("root");
     const root = ReactDOM.createRoot(container);
-    const span = React.createElement("span", { id: "react-span" })
-    root.render(span)
+    const span = React.createElement("h3", null, "I'm a h3")
+    const button = React.createElement("button", {
+        onClick: () => console.log("I'm clicked"),
+        onMouseEnter: () => console.log("Mouse in!")
+    }, "Click me!!")
+    const counterContainer = React.createElement("div", null, [span, button])
+    root.render(counterContainer)
 </script>
 </html>
