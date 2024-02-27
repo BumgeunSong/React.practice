@@ -28,19 +28,24 @@
         <h3>{count}번 클릭</h3>
     }
 
-    const Container = (
-        <div>
-            <Title />
-            <Button />
-        </div>
-    )
+    function Container() {
+        return (
+            <div>
+                <h3>{count}번 클릭</h3>
+                <button onClick={countUp}>
+                    Click me
+                </button >
+            </div>
+        )
+    }
+
     const container = document.getElementById("root")
     const root = ReactDOM.createRoot(container);
-    root.render(Container)
+    root.render(<Container />)
 
     function countUp() {
         count = count + 1
-        root.render(Container)
+        root.render(<Container />)
     }
 </script>
 
