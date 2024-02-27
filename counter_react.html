@@ -15,20 +15,8 @@
 </body>
 <script type="text/babel">
     let count = 0
-
-    const Button = () => (
-        <button
-            onClick={countUp}
-        >
-            Click me
-        </button >
-    )
-
-    const Title = () => {
-        <h3>{count}번 클릭</h3>
-    }
-
-    function Container() {
+    
+    function App() {
         return (
             <div>
                 <h3>{count}번 클릭</h3>
@@ -41,7 +29,7 @@
 
     const container = document.getElementById("root")
     const root = ReactDOM.createRoot(container);
-    root.render(<Container />)
+    root.render(<App />)
 
     function countUp() {
         count = count + 1
