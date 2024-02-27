@@ -14,13 +14,12 @@
     <div id="root"></div>
 </body>
 <script type="text/babel">
-    let count = 0
-    
     function App() {
+        const [counter, setCounter] = React.useState(0)
         return (
             <div>
-                <h3>{count}번 클릭</h3>
-                <button onClick={countUp}>
+                <h3>{counter}번 클릭</h3>
+                <button onClick={ () => setCounter(counter + 1) }>
                     Click me
                 </button >
             </div>
