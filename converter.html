@@ -36,8 +36,11 @@
             return (
                 <div>
                     <h1>Eddy's Unit Converter</h1>
-                    <input placeholder="Minutes" type="number" value={minutes} onChange={handleMinutesInputEvent} /><br />
-                    <input placeholder="Hours" type="number" value={hours} onChange={handleHoursInputEvent} />
+                    <input id="minutes" placeholder="Minutes" type="number" value={minutes} onChange={handleMinutesInputEvent} />
+                    <label htmlFor="minutes">분</label>
+                    <span> = </span>
+                    <input id="hours" placeholder="Hours" type="number" value={hours} onChange={handleHoursInputEvent} />
+                    <label htmlFor="hours">시간</label>
                 </div>
             )
         }
