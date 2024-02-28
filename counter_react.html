@@ -19,11 +19,16 @@
         return (
             <div>
                 <h3>{counter}번 클릭</h3>
-                <button onClick={ () => setCounter(counter + 1) }>
+                <button onClick={ () => setCounter(increment) }>
                     Click me
                 </button >
             </div>
         )
+    }
+
+    // 현재 상태를 기반으로 다음 상태를 업데이트
+    function increment(current) {
+        return current + 1
     }
 
     const container = document.getElementById("root")
