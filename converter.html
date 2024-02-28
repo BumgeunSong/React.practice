@@ -18,17 +18,13 @@
             const [hours, setHours] = React.useState(0)
 
             function handleMinutesInputEvent(event) {
-                console.log(event)
                 const newMinutes = event.target.value
-                console.log(newMinutes)
                 setMinutes(newMinutes)
                 setHours(newMinutes / 60)
             }
 
             function handleHoursInputEvent(event) {
-                console.log(event)
                 const newHours = event.target.value
-                console.log(newHours)
                 setMinutes(newHours * 60)
                 setHours(newHours)
             }
