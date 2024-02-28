@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <title>Unit Converter</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="root"></div>
     <script type="text/babel">
-    
-      function MyApp() {
-        return <h1>Hello, world!</h1>;
-      }
 
-      const container = document.getElementById('root');
-      const root = ReactDOM.createRoot(container);
-      root.render(<MyApp />);
+        function MyApp() {
+            const [minutes, setMinutes] = React.useState(0)
+            const [hours, setHours] = React.useState(0)
+
+            function handleMinutesInputEvent(event) {
+                console.log(event)
+                const newMinutes = event.target.value
+                console.log(newMinutes)
+                setMinutes(newMinutes)
+                setHours(newMinutes / 60)
+            }
+
+            function handleHoursInputEvent(event) {
+                console.log(event)
+                const newHours = event.target.value
+                console.log(newHours)
+                setMinutes(newHours * 60)
+                setHours(newHours)
+            }
+
+            return (
+                <div>
+                    <h1>Eddy's Unit Converter</h1>
+                    <input placeholder="Minutes" type="number" value={minutes} onChange={handleMinutesInputEvent} /><br />
+                    <input placeholder="Hours" type="number" value={hours} onChange={handleHoursInputEvent} />
+                </div>
+            )
+        }
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<MyApp />);
 
     </script>
-  </body>
+</body>
+
 </html>
