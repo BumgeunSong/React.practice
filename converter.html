@@ -20,12 +20,12 @@
             function handleMinutesInputEvent(event) {
                 const newMinutes = event.target.value
                 setMinutes(newMinutes)
-                setHours(newMinutes / 60)
+                setHours((newMinutes / 60).toFixed(2))
             }
 
             function handleHoursInputEvent(event) {
                 const newHours = event.target.value
-                setMinutes(newHours * 60)
+                setMinutes((newHours * 60).toFixed(2))
                 setHours(newHours)
             }
 
