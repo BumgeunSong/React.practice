@@ -14,6 +14,10 @@
     <script type="text/babel">
 
         function MyApp() {
+            Converter()
+        }
+
+        function Converter() {
             const [minutes, setMinutes] = React.useState(0)
             const [hours, setHours] = React.useState(0)
             const [isConvertingHours, setIsConvertingHours] = React.useState(true)
@@ -70,6 +74,7 @@
                 </div>
             )
         }
+
 
         const container = document.getElementById('root');
         const root = ReactDOM.createRoot(container);
