@@ -14,7 +14,28 @@
     <script type="text/babel">
 
         function MyApp() {
-            Converter()
+            return (
+                <div>
+                <UnitSelector />
+                <Converter />
+                </div>
+            )
+        }
+
+        function UnitSelector() {
+            const [isOpen, setIsOpen] = React.useState(false);
+            return (
+                <div>
+                    <button onClick={() => setIsOpen(!isOpen)}>Toggle Dropdown</button>
+                    {isOpen && (
+                        <div>
+                            <p>Option A</p>
+                            <p>Option B</p>
+                            <p>Option C</p>
+                        </div>
+                    )}
+                </div>
+            );
         }
 
         function Converter() {
