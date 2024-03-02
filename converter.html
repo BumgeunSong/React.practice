@@ -19,15 +19,15 @@
                     <UnitSelector />
                     <Title text="Eddy's Unit Converter" />
                     <Converter
-                        unit1="minutes"
-                        unit2="hours"
+                        unit1Name="minutes"
+                        unit2Name="hours"
                         equationToUnit1={(unit2) => (unit2 * 60).toFixed(2)}
                         equationToUnit2={(unit1) => (unit1 / 60).toFixed(2)}
                     />
                     <br />
                     <Converter
-                        unit1="milliseconds"
-                        unit2="seconds"
+                        unit1Name="milliseconds"
+                        unit2Name="seconds"
                         equationToUnit1={(unit2) => (unit2 * 1000).toFixed(3)}
                         equationToUnit2={(unit1) => (unit1 / 1000).toFixed(3)}
                     />
@@ -51,13 +51,13 @@
             );
         }
 
-        function Title(props) {
+        function Title({ text }) {
             return (
-                <h1>{props.text}</h1>
+                <h1>{text}</h1>
             )
         }
 
-        function Converter(props) {
+        function Converter({ unit1Name, unit2Name, equationToUnit1, equationToUnit2 }) {
             const [unit1, setUnit1] = React.useState(0)
             const [unit2, setUnit2] = React.useState(0)
             const [isConvertingUnit2, setIsConvertingUnit2] = React.useState(true)
@@ -65,12 +65,12 @@
             function handleUnit1InputEvent(event) {
                 const newUnit1 = event.target.value
                 setUnit1(newUnit1)
-                setUnit2(props.equationToUnit2(newUnit1))
+                setUnit2(equationToUnit2(newUnit1))
             }
 
             function handleUnit2InputEvent(event) {
                 const newUnit2 = event.target.value
-                setUnit1(props.equationToUnit1(newUnit2))
+                setUnit1(equationToUnit1(newUnit2))
                 setUnit2(newUnit2)
             }
             function reset() {
@@ -87,24 +87,24 @@
                 <div>
                     <div>
                         <input
-                            id={props.unit1}
-                            placeholder={props.unit1}
+                            id={unit1Name}
+                            placeholder={unit1Name}
                             type="number"
                             value={unit1}
                             onChange={handleUnit1InputEvent}
                             disabled={isConvertingUnit2}
                         />
-                        <label htmlFor={props.unit1}>{props.unit1}</label>
+                        <label htmlFor={unit1Name}>{unit1Name}</label>
                         <span> = </span>
                         <input
-                            id={props.unit2}
-                            placeholder={props.unit2}
+                            id={unit2Name}
+                            placeholder={unit2Name}
                             type="number"
                             value={unit2}
                             onChange={handleUnit2InputEvent}
                             disabled={!isConvertingUnit2}
                         />
-                        <label htmlFor={props.unit2}>{props.unit2}</label>
+                        <label htmlFor={unit2Name}>{unit2Name}</label>
                     </div>
                     <div>
                         <button onClick={reset}>리셋</button>
