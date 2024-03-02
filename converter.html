@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <title>Unit Converter</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
@@ -13,7 +14,6 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        const MemorizedConverter = React.memo(Converter)
         function MyApp() {
             return (
                 <div>
@@ -115,6 +115,10 @@
             )
         }
 
+        Converter.propTypes = {
+            unit1Name: PropTypes.string,
+            unit2Name: PropTypes.string
+        }
 
         const container = document.getElementById('root');
         const root = ReactDOM.createRoot(container);
