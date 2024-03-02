@@ -16,8 +16,21 @@
         function MyApp() {
             return (
                 <div>
-                <UnitSelector />
-                <Converter />
+                    <UnitSelector />
+                    <Title text="Eddy's Unit Converter" />
+                    <Converter
+                        unit1="minutes"
+                        unit2="hours"
+                        equationToUnit1={(unit2) => (unit2 * 60).toFixed(2)}
+                        equationToUnit2={(unit1) => (unit1 / 60).toFixed(2)}
+                    />
+                    <br />
+                    <Converter
+                        unit1="milliseconds"
+                        unit2="seconds"
+                        equationToUnit1={(unit2) => (unit2 * 1000).toFixed(3)}
+                        equationToUnit2={(unit1) => (unit1 / 1000).toFixed(3)}
+                    />
                 </div>
             )
         }
