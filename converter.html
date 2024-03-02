@@ -42,6 +42,11 @@
             const [minutes, setMinutes] = React.useState(0)
             const [hours, setHours] = React.useState(0)
             const [isConvertingHours, setIsConvertingHours] = React.useState(true)
+        function Title(props) {
+            return (
+                <h1>{props.text}</h1>
+            )
+        }
 
             function handleMinutesInputEvent(event) {
                 const newMinutes = event.target.value
@@ -67,7 +72,6 @@
             return (
                 <div>
                     <div>
-                        <h1>Eddy's Unit Converter</h1>
                         <input
                             id="minutes"
                             placeholder="Minutes"
