@@ -38,59 +38,60 @@
             );
         }
 
-        function Converter() {
-            const [minutes, setMinutes] = React.useState(0)
-            const [hours, setHours] = React.useState(0)
-            const [isConvertingHours, setIsConvertingHours] = React.useState(true)
         function Title(props) {
             return (
                 <h1>{props.text}</h1>
             )
         }
 
-            function handleMinutesInputEvent(event) {
-                const newMinutes = event.target.value
-                setMinutes(newMinutes)
-                setHours((newMinutes / 60).toFixed(2))
+        function Converter(props) {
+            const [unit1, setUnit1] = React.useState(0)
+            const [unit2, setUnit2] = React.useState(0)
+            const [isConvertingUnit2, setIsConvertingUnit2] = React.useState(true)
+
+            function handleUnit1InputEvent(event) {
+                const newUnit1 = event.target.value
+                setUnit1(newUnit1)
+                setUnit2(props.equationToUnit2(newUnit1))
             }
 
-            function handleHoursInputEvent(event) {
-                const newHours = event.target.value
-                setMinutes((newHours * 60).toFixed(2))
-                setHours(newHours)
+            function handleUnit2InputEvent(event) {
+                const newUnit2 = event.target.value
+                setUnit1(props.equationToUnit1(newUnit2))
+                setUnit2(newUnit2)
             }
             function reset() {
-                setMinutes(0)
-                setHours(0)
+                setUnit1(0)
+                setUnit2(0)
             }
 
             function flip() {
                 reset()
-                setIsConvertingHours((current) => !current)
+                setIsConvertingUnit2((current) => !current)
             }
 
             return (
                 <div>
                     <div>
                         <input
-                            id="minutes"
-                            placeholder="Minutes"
+                            id={props.unit1}
+                            placeholder={props.unit1}
                             type="number"
-                            value={minutes}
-                            onChange={handleMinutesInputEvent}
-                            disabled={isConvertingHours}
+                            value={unit1}
+                            onChange={handleUnit1InputEvent}
+                            disabled={isConvertingUnit2}
                         />
-                        <label htmlFor="minutes">분</label>
+                        <label htmlFor={props.unit1}>{props.unit1}</label>
                         <span> = </span>
                         <input
-                            id="hours"
-                            placeholder="Hours"
+                            id={props.unit2}
+                            placeholder={props.unit2}
                             type="number"
-                            value={hours}
-                            onChange={handleHoursInputEvent}
-                            disabled={!isConvertingHours}
+                            value={unit2}
+                            onChange={handleUnit2InputEvent}
+                            disabled={!isConvertingUnit2}
                         />
-                        <label htmlFor="hours">시간</label>
+                        <label htmlFor={props.unit2}>{props.unit2}</label>
                     </div>
                     <div>
                         <button onClick={reset}>리셋</button>
