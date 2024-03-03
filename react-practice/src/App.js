@@ -15,7 +15,7 @@ function App() {
   }
 
   const searchKeyword = () => {
-    if (keyword !== "" && keyword.length >= 4) {
+    if (keyword.length > 5) {
       console.log("Search for " + keyword)
     }
   }
