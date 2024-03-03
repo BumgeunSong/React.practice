@@ -6,9 +6,7 @@ function App() {
   const [counter, setValue] = useState(0);
   const [keyword, setKeyword] = useState("");
   const onClick = () => setValue((prev) => prev + 1);
-
   const onChange = (event) => setKeyword(event.target.value)
-  console.log("Render Component")
 
   const callAPI = () => {
     console.log("Call THE API..")
@@ -19,8 +17,13 @@ function App() {
       console.log("Search for " + keyword)
     }
   }
-  useEffect(callAPI, []) // 최초 render 시에만 callAPI를 실행한다.
+
+  const showCounter = () => {
+      console.log("Counter: " + counter)
+  }
+
   useEffect(searchKeyword, [keyword]) // keyword state가 변경될 때만 searchKeyword를 실행한다.
+  useEffect(showCounter, [counter])
   return (
     <div className="App">
       <header className="App-header">
