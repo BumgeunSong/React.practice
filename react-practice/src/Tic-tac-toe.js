@@ -5,7 +5,7 @@ import styles from './Tic-tac-toe.module.css';
 import App from './App';
 
 function Square({ value }) {
-    return <button className="square">{value}</button>;
+    return <button className={styles.square}>{value}</button>;
 }
 
 function TicTacToe() {
