@@ -9,8 +9,14 @@ function Square({ value }) {
 }
 
 function TicTacToe() {
+    const rows = Array(3).fill(Array(3).fill("X"))
     return (
         <div className="TicTacToe">
+            {rows.map((row) => (
+                <div className="board-row">
+                    {row.map((value) => <Square value={value} />)}
+                </div>
+            ))}
         </div>
     )
 }
