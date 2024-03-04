@@ -14,7 +14,7 @@ function TicTacToe() {
         <div className="TicTacToe">
             {rows.map((row) => (
                 <div className="board-row">
-                    {row.map((value) => <Square value={value} />)}
+                    {row.map((value, index) => <Square key={index} value={value} />)}
                 </div>
             ))}
         </div>
