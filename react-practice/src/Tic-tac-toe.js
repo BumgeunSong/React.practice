@@ -12,11 +12,23 @@ function TicTacToe() {
     const rows = Array(3).fill(Array(3).fill("X"))
     return (
         <div className="TicTacToe">
-            {rows.map((row) => (
-                <div className="board-row">
-                    {row.map((value, index) => <Square key={index} value={value} />)}
-                </div>
-            ))}
+            <Board rows={rows} />
+        </div>
+    )
+}
+
+function Board({ rows }) {
+    return (
+        <div className="Board">
+            {rows.map((row, index) => <Row key={index} values={row} />)}
+        </div>
+    )
+}
+
+function Row({ values }) {
+    return (
+        <div className="board-row">
+            {values.map((value, index) => <Square key={index} value={value} />)}
         </div>
     )
 }
