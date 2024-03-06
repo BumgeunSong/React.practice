@@ -1,18 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import styles from './Tic-tac-toe.module.css';
+import { useState, useEffect } from "react";
 
 import App from './App';
 
-function Square({ value }) {
-    return <button className={styles.square}>{value}</button>;
-}
-
 function TicTacToe() {
-    const rows = Array(3).fill(Array(3).fill("X"))
+    const defaultBoardModel = Array(3).fill(Array(3).fill("X"))
+    const [boardModel, setBoardModel] = useState(defaultBoardModel)
+
     return (
         <div className="TicTacToe">
-            <Board rows={rows} />
+            <Board boardModel={boardModel} />
         </div>
     )
 }
