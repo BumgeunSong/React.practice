@@ -17,20 +17,36 @@ function TicTacToe() {
     )
 }
 
-function Board({ rows }) {
+function Board({ boardModel }) {
     return (
         <div className="Board">
-            {rows.map((row, index) => <Row key={index} values={row} />)}
+            {
+                boardModel.map((rowModel, rowIndex) =>
+                    <Row key={rowIndex} rowIndex={rowIndex} rowModel={rowModel} />
+                )
+            }
         </div>
     )
 }
 
-function Row({ values }) {
+function Row({ rowIndex, rowModel }) {
     return (
         <div className="board-row">
-            {values.map((value, index) => <Square key={index} value={value} />)}
+            {
+                rowModel.map((value, columnIndex) =>
+                    <Square
+                        key={rowIndex + columnIndex}
+                        rowIndex={rowIndex}
+                        collumnIndex={columnIndex}
+                        value={value} />
+                )
+            }
         </div>
     )
+}
+
+function Square({ rowIndex, collumnIndex, value }) {
+    return <button className={styles.square}>{value}</button>;
 }
 
 export default TicTacToe;
