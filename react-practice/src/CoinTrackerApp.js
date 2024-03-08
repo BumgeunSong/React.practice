@@ -19,8 +19,22 @@ function CoinTrackerApp() {
     <div className="App">
       <h1>오늘의 비트코인 가격</h1>
       {loading ? <p>loading...</p> : null}
+      { coins.map((coin) => <CoinView key={coin.key} coin={coin}/>) }
     </div>
   );
+}
+
+function CoinView({ coin }) {
+    return (
+        <div>
+            <h3>
+               {coin.name}
+            </h3>
+            <p>
+                {coin.quotes.USD.price.toFixed(2)} <strong>USD</strong>
+            </p>
+        </div>
+    )
 }
 
 export default CoinTrackerApp;
