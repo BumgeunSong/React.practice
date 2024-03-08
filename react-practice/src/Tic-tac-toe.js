@@ -13,15 +13,11 @@ function TicTacToe() {
 
     return (
         <div className="TicTacToe">
-            <BoardContext.Provider boardModel={boardModel}>
-                <Board boardModel={boardModel} />
-            </BoardContext.Provider>
         </div>
     )
 }
 
 function Board({ boardModel }) {
-    const boardModelFromContext = useContext(BoardContext)
     return (
         <div className="Board">
             {
