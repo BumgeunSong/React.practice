@@ -4,10 +4,15 @@ import { useState, useEffect } from "react";
 
 function CoinTrackerApp() {
   const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([])
+
   useEffect(() => {
     fetch("https://api.coinpaprika.com/v1/tickers?limit=10")
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then((json) => {
+        setCoins(json)
+        setLoading(false)
+    })
   }, [])
 
   return (
