@@ -8,20 +8,20 @@ function MovieApp() {
         fetch("https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year")
             .then((response) => response.json())
             .then((json) => {
-                setMovies(json)
+                setMovies(json.data.movies)
                 setLoading(false)
-                console.log(movies)
+                console.log(json.data.movies)
             })
     }, [])
 
     return (
         <div className="App">
             <h1>Movie App</h1>
-            {/* {loading ? (
+            {loading ? (
                 <p>loading...</p>
             ) : (
-                // movies.map((movie) => <MovieView key={movie.key} coin={movie} />)
-            )} */}
+                movies.map((movie) => <MovieView key={movie.id} movie={movie} />)
+            )}
         </div>
     );
 }
@@ -30,11 +30,9 @@ function MovieView({ movie }) {
     return (
         <div>
             <h3>
-                {movie.title}
+                {movie.title} ({movie.year}) rating: {movie.rating}
             </h3>
-            <p>
-                {movie.rating}
-            </p>
+            <img src={movie.medium_cover_image}></img>
         </div>
     )
 }
