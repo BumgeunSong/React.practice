@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MovieApp() {
     const [loading, setLoading] = useState(true);
@@ -30,9 +31,12 @@ function MovieApp() {
 function Movie({ movie }) {
     return (
         <div>
-            <img src={movie.medium_cover_image}></img>
+            <h1>
+               <Link to="/movies/detail">{movie.title}</Link>
+            </h1>
+            <img src={movie.medium_cover_image} alt={movie.title}></img>
             <h2>
-                {movie.title} ({movie.year}) rating: {movie.rating}
+                rating: {movie.rating}
             </h2>
             <p>{movie.summary}</p>
             <ul>
