@@ -21,15 +21,16 @@ function MovieApp() {
             {loading ? (
                 <p>loading...</p>
             ) : (
-                movies.map((movie) => <MovieView key={movie.id} movie={movie} />)
+                movies.map((movie) => <Movie key={movie.id} movie={movie} />)
             )}
         </div>
     );
 }
 
-function MovieView({ movie }) {
+function Movie({ movie }) {
     return (
         <div>
+            <img src={movie.medium_cover_image}></img>
             <h2>
                 {movie.title} ({movie.year}) rating: {movie.rating}
             </h2>
@@ -37,7 +38,7 @@ function MovieView({ movie }) {
             <ul>
                 {movie.genres.map((genre) => <li key={genre}>{genre}</li>)}
             </ul>
-            <img src={movie.medium_cover_image}></img>
+            
         </div>
     )
 }
