@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import CoinTrackerApp from './CoinTrackerApp';
 import TicTacToe from './Tic-tac-toe';
-import MovieApp from './MovieApp';
+import MovieApp from './Components/MovieApp';
 import Home from './routes/Home';
 import Detail from './routes/Detail';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import MovieDetail from './Components/MovieDetail';
 
 
 const router = createBrowserRouter([
@@ -22,8 +23,8 @@ const router = createBrowserRouter([
     element: <MovieApp />,
   },
   {
-    path: "/movies/detail",
-    element: <Detail />,
+    path: "/movies/detail/:id",
+    element: <MovieDetail />,
   }
 ])
 
