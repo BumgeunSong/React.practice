@@ -11,7 +11,9 @@ function MovieApp() {
         setLoading(false)
     }
 
-    useEffect(getMovies, []);
+    useEffect(() => {
+        getMovies()
+    }, []);
 
     return (
         <div className="App">
