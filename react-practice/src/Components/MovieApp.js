@@ -10,6 +10,7 @@ function MovieApp() {
         let json = await response.json()
         setMovies(json.data.movies)
         setLoading(false)
+        console.log(json.data.movies)
     }
 
     useEffect(() => {
@@ -32,7 +33,7 @@ function Movie({ movie }) {
     return (
         <div>
             <h1>
-               <Link to="/movies/detail">{movie.title}</Link>
+               <Link to={`/movies/detail/${movie.id}`}>{movie.title}</Link>
             </h1>
             <img src={movie.medium_cover_image} alt={movie.title}></img>
             <h2>
