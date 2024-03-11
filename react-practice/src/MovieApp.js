@@ -30,9 +30,13 @@ function MovieApp() {
 function MovieView({ movie }) {
     return (
         <div>
-            <h3>
+            <h2>
                 {movie.title} ({movie.year}) rating: {movie.rating}
-            </h3>
+            </h2>
+            <p>{movie.summary}</p>
+            <ul>
+                {movie.genres.map((genre) => <li key={genre}>{genre}</li>)}
+            </ul>
             <img src={movie.medium_cover_image}></img>
         </div>
     )
