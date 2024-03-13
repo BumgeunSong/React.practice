@@ -1,21 +1,26 @@
 import styled from "styled-components";
 
+const Parent = styled.div`
+display: flex;
+`;
+
+const Box1 = styled.div`
+background-color: teal;
+width: 100px;
+height: 100px;
+`;
+
+const Box2 = styled.div`
+background-color: tomato;
+width: 100px;
+height: 100px;
+`;
+
 function App() {
-
-  const Parent = styled.div`
-    display: flex;
-  `
-
-  const Box = styled.div`
-    background-color: teal;
-    width: 100;
-    height: 100;
-  `
-
   return (
     <Parent>
-      <Box />
-      <div style={{ backgroundColor: "tomato", width: 100, height: 100 }}></div>
+      <Box1 />
+      <Box2 />
     </Parent>
   );
 }
