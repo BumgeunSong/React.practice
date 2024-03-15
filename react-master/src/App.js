@@ -5,8 +5,8 @@ display: flex;
 `;
 
 
-const Box = styled.div < { $primary?: boolean; } > `
-  background-color: ${props => props.$primary ? "tea" : "tomato"};
+const Box = styled.div`
+  background-color: ${props => props.bgColor};
   width: 100px;
   height: 100px;
 `;
@@ -26,8 +26,8 @@ height: 100px;
 function App() {
   return (
     <Parent>
-      <Box1 />
-      <Box2 />
+      <Box bgColor="teal" />
+      <Box bgColor="tomato" />
     </Parent>
   );
 }
