@@ -11,6 +11,11 @@ const Box = styled.div`
   height: 100px;
 `;
 
+const BigBox = styled(Box)`
+  width: 300px;
+  height: 300px;
+`
+
 const Box1 = styled.div`
 background-color: teal;
 width: 100px;
@@ -28,6 +33,7 @@ function App() {
     <Parent>
       <Box bgColor="teal" />
       <Box bgColor="tomato" />
+      <BigBox bgColor="gray" />
     </Parent>
   );
 }
