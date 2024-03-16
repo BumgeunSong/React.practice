@@ -47,15 +47,24 @@ const Input = styled.input.attrs({ required: true })`
   background-color: gray;
 `;
 
+const Title = styled.h1`
+color: ${props => props.theme.textColor};
+`
+
+const Wrapper = styled.div`
+display: flex;
+height: 100vh;
+width: 100vw;
+justify-content: center;
+align-items: center;
+background-color: ${props => props.theme.backgroundColor};
+`
+
 function App() {
   return (
-    <Parent>
-      <Box bgColor="teal">
-        <Emoji>
-          😀
-        </Emoji>
-      </Box>
-    </Parent>
+    <Wrapper>
+      <Title>Boooya!</Title>
+    </Wrapper>
   );
 }
 
