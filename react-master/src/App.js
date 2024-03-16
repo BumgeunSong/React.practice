@@ -19,6 +19,10 @@ const rotationAnimation = keyframes`
   }
 `
 
+const Emoji = styled.span`
+font-size: 36px;
+`
+
 const Box = styled.div`
   background-color: ${props => props.bgColor};
   width: 100px;
@@ -27,10 +31,9 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${rotationAnimation} 2s linear infinite;
-  span {
-    font-size: 36px;
+  ${Emoji} {
     &:hover {
-      font-size: 48px;
+      font-size: 72px;
     }
   }
 `;
@@ -48,9 +51,9 @@ function App() {
   return (
     <Parent>
       <Box bgColor="teal">
-        <span>
+        <Emoji>
           😀
-        </span>
+        </Emoji>
       </Box>
     </Parent>
   );
