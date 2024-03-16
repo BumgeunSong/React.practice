@@ -27,6 +27,12 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${rotationAnimation} 2s linear infinite;
+  span {
+    font-size: 36px;
+    &:hover {
+      
+    }
+  }
 `;
 
 const BigBox = styled(Box)`
