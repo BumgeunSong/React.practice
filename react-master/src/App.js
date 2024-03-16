@@ -30,7 +30,7 @@ const Box = styled.div`
   span {
     font-size: 36px;
     &:hover {
-      
+      font-size: 48px;
     }
   }
 `;
