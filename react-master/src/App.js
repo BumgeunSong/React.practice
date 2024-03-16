@@ -5,6 +5,13 @@ display: flex;
 `;
 
 
+const Btn = styled.button`
+  color: white;
+  background-color: tomato;
+  border: 0;
+  border-radius: 15px;
+`;
+
 const Box = styled.div`
   background-color: ${props => props.bgColor};
   width: 100px;
@@ -31,9 +38,8 @@ height: 100px;
 function App() {
   return (
     <Parent>
-      <Box bgColor="teal" />
-      <Box bgColor="tomato" />
-      <BigBox bgColor="gray" />
+      <Btn>Login</Btn>
+      <Btn as="a">Login</Btn>
     </Parent>
   );
 }
