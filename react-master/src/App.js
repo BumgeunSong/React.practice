@@ -4,14 +4,6 @@ const Parent = styled.div`
 display: flex;
 `;
 
-
-const Btn = styled.button`
-  color: white;
-  background-color: tomato;
-  border: 0;
-  border-radius: 15px;
-`;
-
 const rotationAnimation = keyframes`
   0% {
     transform: rotate(0deg);
@@ -31,26 +23,16 @@ const Box = styled.div`
   background-color: ${props => props.bgColor};
   width: 100px;
   height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation: ${rotationAnimation} 2s linear infinite;
 `;
-
 
 const BigBox = styled(Box)`
   width: 300px;
   height: 300px;
 `
-
-const Box1 = styled.div`
-background-color: teal;
-width: 100px;
-height: 100px;
-`;
-
-const Box2 = styled.div`
-background-color: tomato;
-width: 100px;
-height: 100px;
-`;
 
 const Input = styled.input.attrs({ required: true })`
   background-color: gray;
@@ -59,7 +41,11 @@ const Input = styled.input.attrs({ required: true })`
 function App() {
   return (
     <Parent>
-      <Box bgColor="teal"></Box>
+      <Box bgColor="teal">
+        <span>
+          😀
+        </span>
+      </Box>
     </Parent>
   );
 }
