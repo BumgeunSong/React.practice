@@ -2,13 +2,12 @@ import styled from "styled-components";
 
 interface ContainerProps {
     bgColor: string;
-    borderMaker: (radius: number) => string
 }
 
 const Container = styled.div<ContainerProps>`
     width: 100px;
     height: 100px;
-    border-radius: ${props => props.borderMaker(20)};
+    border-radius: 30px;
     background-color: ${props => props.bgColor};
 `;
 
@@ -17,7 +16,7 @@ interface CircleProps {
 }
 
 function Circle({ bgColor }: CircleProps) {
-    return <Container bgColor={bgColor} borderMaker={(radius) => `${radius}px`}/>;
+    return <Container bgColor={bgColor} />;
 }
 
 export default Circle
