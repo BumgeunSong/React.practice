@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface ContainerProps {
     bgColor: string;
-    borderColor?: string;
+    borderColor: string;
 }
 
 const Container = styled.div<ContainerProps>`
@@ -20,7 +20,7 @@ interface CircleProps {
 }
 
 function Circle({ bgColor, borderColor }: CircleProps) {
-    return <Container bgColor={bgColor} borderColor={borderColor} />;
+    return <Container bgColor={bgColor} borderColor={borderColor ?? bgColor} />;
 }
 
 export default Circle
