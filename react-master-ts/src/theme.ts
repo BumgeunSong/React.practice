@@ -1,9 +1,11 @@
 import { DefaultTheme } from 'styled-components';
 
-const myTheme: DefaultTheme = {
-    borderRadius: '5px',
-    colors: {
-      main: 'cyan',
-      secondary: 'magenta'
-    }
-  }
+const lightTheme: DefaultTheme = {
+    textColor: 'black',
+    bgColor: 'white',
+}
+
+const darkTheme: DefaultTheme = {
+    textColor: 'white',
+    bgColor: 'black',
+}
