@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Root from './routes/root'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div><h1>Less but better</h1></div>
+    element: <Root />
   }
 ]);
 
