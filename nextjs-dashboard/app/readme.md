@@ -14,3 +14,8 @@ title: {
 ```
 - Page나 Layout에서만 메타데이터를 지정할 수 있다.
 - Server Component에서만 메타데이터를 지정할 수 있다.
+
+## Dynamic Routes
+- '[id]' 로 폴더 이름을 만들고, page.tsx 파일을 넣으면 다이나믹 루트가 된다.
+- 페이지에서는 props 으로 id 자리에 들어간 데이터를 얻을 수 있다.
+- props 안에는 url의 데이터가 들어간 params와, 쿼리 파라미터가 들어있는 search params이 있다.
