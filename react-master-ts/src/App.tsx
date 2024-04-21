@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { darkTheme, lightTheme } from './theme';
 
 const Conatiner = styled.div`
@@ -8,6 +8,12 @@ const Conatiner = styled.div`
 
 const H1 = styled.h1`
   color: ${(props) => props.theme.textColor};
+`
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    color: red;
+  }
 `
 
 function App() {
@@ -25,6 +31,8 @@ function App() {
   }
   
   return (
+    <>
+    <GlobalStyle />
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
     <Conatiner>
       <H1>Booya</H1>
@@ -35,6 +43,7 @@ function App() {
       </form>
     </ Conatiner>
     </ThemeProvider>
+    </>
   );
 }
 
