@@ -1,14 +1,4 @@
-import React, { useState } from 'react';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { darkTheme, lightTheme } from './theme';
-
-const Conatiner = styled.div`
-  background-color: ${(props) => props.theme.bgColor};
-`
-
-const H1 = styled.h1`
-  color: ${(props) => props.theme.textColor};
-`
+import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
   
@@ -56,16 +46,4 @@ table {
 	border-spacing: 0;
 }
 `
-
-function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <ThemeProvider theme={lightTheme}>
-        <Router />
-      </ThemeProvider>
-    </>
-  );
-}
-
-export default App;
+export default GlobalStyle;
