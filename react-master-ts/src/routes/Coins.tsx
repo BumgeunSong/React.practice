@@ -1,7 +1,12 @@
+import styled from "styled-components";
 import Coin from "./Coin";
 
-export default function Coins() {
-    return <>
-        <h1>These are coins</h1>
-    </>
+const Title = styled.h1`
+    color: ${props => props.theme.primary }
+`
+
+function Coins() {
+    return <Title>코인!</Title>
 }
+
+export default Coins;

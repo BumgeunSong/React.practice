@@ -7,8 +7,8 @@ import GlobalStyle from './GlobalStyle';
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
         <Router />
       </ThemeProvider>
     </>
