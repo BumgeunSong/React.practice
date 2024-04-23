@@ -2,13 +2,21 @@ import styled from "styled-components";
 import Coin from "./Coin";
 
 const Title = styled.h1`
+    font-size: 48px;
     color: ${props => props.theme.primary}
 `
 
 const Container = styled.div``
 const Header = styled.header``
 const CoinList = styled.ul``
-const CoinItem = styled.li``
+const CoinItem = styled.li`
+    margin-top: 16px;
+    margin-bottom: 16px;
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.background};
+    border-radius: 16px;
+    padding: 16px;
+`
 
 const coinSample =
     [
@@ -56,7 +64,7 @@ function Coins() {
             <Title>코인 목록</Title>
         </Header>
         <CoinList>
-            {coinSample.map(coin => <CoinItem key={coin.id}>name: {coin.name}</CoinItem>)}
+            {coinSample.map(coin => <CoinItem key={coin.id}>{coin.name} &rarr;</CoinItem>)}
         </CoinList>
     </Container>
 }
