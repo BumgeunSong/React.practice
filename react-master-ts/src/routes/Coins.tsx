@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Coin from "./Coin";
+import { Link } from "react-router-dom";
 
 const Title = styled.h1`
     font-size: 48px;
@@ -64,10 +65,13 @@ function Coins() {
             <Title>코인 목록</Title>
         </Header>
         <CoinList>
-            {coinSample.map(coin => <CoinItem key={coin.id}>{coin.name} &rarr;</CoinItem>)}
+            {coinSample.map((coin) => (
+                <CoinItem key={coin.id}>
+                    <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link> 
+                </CoinItem>
+            ))}
         </CoinList>
     </Container>
 }
-
 
 export default Coins;
