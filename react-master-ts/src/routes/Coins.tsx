@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Coin from "./Coin";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Title = styled.h1`
     font-size: 48px;
@@ -32,6 +33,16 @@ const CoinItem = styled.li`
 	}
   }
 `
+
+interface CoinInterface {
+    id: string,
+    name: string,
+    symbol: string,
+    rank: number,
+    is_new: boolean,
+    is_active: boolean,
+    type: string
+}
 
 const coinSample =
     [
@@ -74,12 +85,14 @@ const coinSample =
     ];
 
 function Coins() {
+    const [coins, setCoins] = useState<CoinInterface[]>([])
+
     return <Container>
         <Header>
             <Title>코인 목록</Title>
         </Header>
         <CoinList>
-            {coinSample.map((coin) => (
+            {coins.map((coin) => (
                 <CoinItem key={coin.id}>
                     <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link> 
                 </CoinItem>
