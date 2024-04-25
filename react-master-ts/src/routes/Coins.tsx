@@ -7,7 +7,12 @@ const Title = styled.h1`
     color: ${props => props.theme.primary}
 `
 
-const Container = styled.div``
+const Container = styled.div`
+    padding: 0px 20px;
+    max-width: 480px;
+    margin: 0 auto;
+`
+
 const Header = styled.header``
 const CoinList = styled.ul``
 const CoinItem = styled.li`
