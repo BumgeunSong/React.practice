@@ -16,7 +16,16 @@ const CoinItem = styled.li`
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
     border-radius: 16px;
-    padding: 16px;
+    a {
+        padding: 16px;
+        transition: color 0.2s ease-in;
+        display: block;
+    }
+    &:hover {
+	a {
+		color: ${(props) => props.theme.secondary};
+	}
+  }
 `
 
 const coinSample =
