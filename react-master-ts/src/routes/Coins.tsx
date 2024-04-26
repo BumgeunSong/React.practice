@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Coin from "./Coin";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Title = styled.h1`
     font-size: 48px;
@@ -86,6 +86,13 @@ const coinSample =
 
 function Coins() {
     const [coins, setCoins] = useState<CoinInterface[]>([])
+    useEffect(() => {
+        (async () => {
+            const response = await fetch("https://api.coinpaprika.com/v1/coins");
+            const json = await response.json();
+            setCoins(json.slice(0, 20))
+        })();
+    }, [])
 
     return <Container>
         <Header>
