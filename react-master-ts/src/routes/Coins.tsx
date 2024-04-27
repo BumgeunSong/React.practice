@@ -25,13 +25,20 @@ const CoinItem = styled.li`
     a {
         padding: 16px;
         transition: color 0.2s ease-in;
-        display: block;
+        display: flex;
+        align-items: center;
     }
     &:hover {
 	a {
 		color: ${(props) => props.theme.secondary};
 	}
   }
+`
+
+const Img = styled.img`
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
 `
 
 interface CoinInterface {
@@ -101,7 +108,11 @@ function Coins() {
         <CoinList>
             {coins.map((coin) => (
                 <CoinItem key={coin.id}>
-                    <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link> 
+                    <Link to={`/${coin.id}`}>
+                    <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}>
+                    </Img>
+                    {coin.name} &rarr;
+                    </Link> 
                 </CoinItem>
             ))}
         </CoinList>
