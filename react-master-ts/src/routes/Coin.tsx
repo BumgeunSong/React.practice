@@ -47,7 +47,7 @@ export default function Coin() {
 
         fetchCoinInfo()
         fetchCoinPrices()
-    }, [])
+    }, [coinId]) // coinID가 변하면 effect를 다시 호출
 
     return (
         <CoinContainer>
