@@ -8,23 +8,52 @@ interface RouterState {
     name: string;
 }
 
-const CoinContainer = styled.div`
-    text-align: center;
-`
-const CoinTitle = styled.h1`
-    margin-bottom: 20px;
-`
+const Title = styled.h1`
+  font-size: 48px;
+  color: ${(props) => props.theme.accentColor};
+`;
+const Loader = styled.span`
+  text-align: center;
+  display: block;
+`;
+const Container = styled.div`
+  padding: 0px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+`;
+const Header = styled.header`
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-const CoinDescription = styled.p`
-    margin-bottom: 10px;
-`
-
-const CoinImage = styled.img`
-    max-width: 200px;
-    margin-bottom: 10px;
-`
+const Overview = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
+const OverviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
+const Description = styled.p`
+  margin: 20px 0px;
+`;
 
 export default function Coin() {
+    const [loading, setLoading] = useState(true)
     const { coinId } = useParams()
     const location = useLocation()
     const state = location.state as RouterState
@@ -37,12 +66,13 @@ export default function Coin() {
             const response = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`);
             const json = await response.json();
             setCoinInfo(json)
+            setLoading(false)
         }
 
         const fetchCoinPrices = async () => {
             const reponse = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}/markets?quotes=KRW`);
             const json = await reponse.json();
-            setCoinPrices(json.slice(0, 20))
+            setCoinPrices(json.slice(0, 5))
         }
 
         fetchCoinInfo()
@@ -50,46 +80,53 @@ export default function Coin() {
     }, [coinId]) // coinID가 변하면 effect를 다시 호출
 
     return (
-        <CoinContainer>
-            {state ? (
-                <>
-                <CoinTitle>이것은 {state.name} 코인</CoinTitle>
-                <p>name: {coinInfo?.name}</p>
-                <CoinDescription>Description - {coinInfo?.description}</CoinDescription>
-                <h2>코인 가격</h2>
-                {coinPrices?.map((coinPrice) => 
-                    <CoinPriceItem key={coinPrice.exchange_id} exchange_name={coinPrice.exchange_name} price={coinPrice.quotes.KRW.price} />
-                )
-
-                }
-                <CoinImage src={`${coinInfo?.whitepaper.thumbnail}`} />
-                <a href={`${coinInfo?.whitepaper.link}`}>Whitepaper</a>
-                <div>
-                <Outlet />
-                </div>
-                </>
+        <Container>
+            <Header>
+                <Title>
+                    {state?.name ?
+                        state.name : loading ? "Loading..." : coinInfo?.name
+                    }
+                </Title>
+            </Header>
+            {loading ? (
+                <Loader>Loading...</Loader>
             ) : (
-                <h1>Loading...</h1>
+                <>
+                    <Overview>
+                        <OverviewItem>
+                            <span>Rank of Coin</span>
+                            <span>{coinInfo?.rank}</span>
+                        </OverviewItem>
+                        <OverviewItem>
+                            <span>Symbol</span>
+                            <span>{coinInfo?.symbol}</span>
+                        </OverviewItem>
+                        <OverviewItem>
+                            <span>Started At</span>
+                            <span>{coinInfo?.started_at}</span>
+                        </OverviewItem>
+                    </Overview>
+                    <Description>
+                        {coinInfo?.description}
+                    </Description>
+                    {coinPrices?.map((coinPrice) => (
+                        <Overview>
+                            <OverviewItem>
+                                <span>Exchange</span>
+                                <span>{coinPrice?.exchange_name}</span>
+                            </OverviewItem>
+                            <OverviewItem>
+                                <span>Price</span>
+                                <span>{coinPrice?.quotes.KRW.price.toFixed(0)} KRW</span>
+                            </OverviewItem>
+                            <OverviewItem>
+                                <span>24H Volume</span>
+                                <span>{coinPrice?.adjusted_volume_24h_share.toFixed(3)}</span>
+                            </OverviewItem>
+                        </Overview>
+                    ))}
+                </>
             )}
-        </CoinContainer>
-    );
-}
-
-interface CoinPriceProps {
-    price: number;
-    exchange_name: string;
-}
-
-function CoinPriceItem(props: CoinPriceProps) {
-    return (
-        <CoinItem>
-            {props.exchange_name}: {props.price.toFixed(2)} KRW
-        </CoinItem>
+            </ Container>
     )
 }
-
-const CoinItem = styled.li`
-    margin-top: 16px;
-    margin-bottom: 16px;
-    border-radius: 16px;
-`
