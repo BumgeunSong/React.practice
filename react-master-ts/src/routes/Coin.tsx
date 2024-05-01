@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom"
+import { Outlet, useLocation, useParams } from "react-router-dom"
 import CoinInfoInterface from "./CoinInfoInterface";
 import styled from "styled-components";
 import { CoinPrice } from "./CoinPriceInterface";
@@ -64,6 +64,9 @@ export default function Coin() {
                 }
                 <CoinImage src={`${coinInfo?.whitepaper.thumbnail}`} />
                 <a href={`${coinInfo?.whitepaper.link}`}>Whitepaper</a>
+                <div>
+                <Outlet />
+                </div>
                 </>
             ) : (
                 <h1>Loading...</h1>
