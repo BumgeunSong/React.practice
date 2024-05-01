@@ -52,6 +52,12 @@ const Description = styled.p`
   margin: 20px 0px;
 `;
 
+const Img = styled.img`
+    width: 35px;
+    height: 35px;
+    margin-right: 16px;
+`
+
 export default function Coin() {
     const [loading, setLoading] = useState(true)
     const { coinId } = useParams()
@@ -83,6 +89,7 @@ export default function Coin() {
         <Container>
             <Header>
                 <Title>
+                <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfo?.symbol.toLowerCase()}`} />
                     {state?.name ?
                         state.name : loading ? "Loading..." : coinInfo?.name
                     }
@@ -103,7 +110,7 @@ export default function Coin() {
                         </OverviewItem>
                         <OverviewItem>
                             <span>Started At</span>
-                            <span>{coinInfo?.started_at}</span>
+                            <span>{dateOnlyString(coinInfo?.started_at)}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>
@@ -127,6 +134,17 @@ export default function Coin() {
                     ))}
                 </>
             )}
-            </ Container>
+        </ Container>
     )
+}
+
+function dateOnlyString(fullDateString: string | undefined) {
+    if (fullDateString === undefined) {
+        // Handle the case where fullDateString is undefined
+        return "Invalid Date";
+    }
+
+    const dateObject: Date = new Date(fullDateString);
+    const dateOnlyString: string = dateObject.toISOString().split('T')[0];
+    return dateOnlyString; // Output: 'YYYY-MM-DD'
 }
