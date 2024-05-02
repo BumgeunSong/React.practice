@@ -58,6 +58,22 @@ const Img = styled.img`
     margin-right: 16px;
 `
 
+const Tabs = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 24px 0px;
+    gap: 8px;
+`
+
+const Tab = styled.span`
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 8px 0px;
+    border-radius: 8px;
+`
+
 export default function Coin() {
     const [loading, setLoading] = useState(true)
     const { coinId } = useParams()
@@ -89,7 +105,7 @@ export default function Coin() {
         <Container>
             <Header>
                 <Title>
-                <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfo?.symbol.toLowerCase()}`} />
+                    <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfo?.symbol.toLowerCase()}`} />
                     {state?.name ?
                         state.name : loading ? "Loading..." : coinInfo?.name
                     }
@@ -132,8 +148,14 @@ export default function Coin() {
                             </OverviewItem>
                         </Overview>
                     ))}
-                    <Link to={`/${coinId}/chart`}>Chart</Link>
-                    <Link to={`/${coinId}/price`}>Price</Link>
+                    <Tabs>
+                        <Tab>
+                            <Link to={`/${coinId}/chart`}>Chart</Link>
+                        </Tab>
+                        <Tab>
+                            <Link to={`/${coinId}/price`}>Price</Link>
+                        </Tab>
+                    </Tabs>
                     <br></br>
                     <Outlet />
                 </>
