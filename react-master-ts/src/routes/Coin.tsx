@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom"
+import { Link, Outlet, useLocation, useMatch, useParams } from "react-router-dom"
 import CoinInfoInterface from "./CoinInfoInterface";
 import styled from "styled-components";
 import { CoinPrice } from "./CoinPriceInterface";
@@ -65,13 +65,17 @@ const Tabs = styled.div`
     gap: 8px;
 `
 
-const Tab = styled.span`
+const Tab = styled.span<{ isActive: boolean }>`
     text-align: center;
     text-transform: uppercase;
     font-size: 12px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: ${props => props.isActive ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)"};
     padding: 8px 0px;
     border-radius: 8px;
+
+    a {
+        display: block;
+    }
 `
 
 export default function Coin() {
@@ -82,6 +86,8 @@ export default function Coin() {
 
     const [coinInfo, setCoinInfo] = useState<CoinInfoInterface>()
     const [coinPrices, setCoinPrices] = useState<[CoinPrice]>()
+    const priceMatch = useMatch("/:coinId/price")
+    const chartMatch = useMatch("/:coinId/chart")
 
     useEffect(() => {
         const fetchCoinInfo = async () => {
@@ -149,10 +155,10 @@ export default function Coin() {
                         </Overview>
                     ))}
                     <Tabs>
-                        <Tab>
+                        <Tab isActive={chartMatch !== null}>
                             <Link to={`/${coinId}/chart`}>Chart</Link>
                         </Tab>
-                        <Tab>
+                        <Tab isActive={priceMatch !== null}>
                             <Link to={`/${coinId}/price`}>Price</Link>
                         </Tab>
                     </Tabs>
