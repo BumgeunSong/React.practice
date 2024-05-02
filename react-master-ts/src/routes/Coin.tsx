@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom"
+import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import CoinInfoInterface from "./CoinInfoInterface";
 import styled from "styled-components";
 import { CoinPrice } from "./CoinPriceInterface";
@@ -132,6 +132,10 @@ export default function Coin() {
                             </OverviewItem>
                         </Overview>
                     ))}
+                    <Link to={`/${coinId}/chart`}>Chart</Link>
+                    <Link to={`/${coinId}/price`}>Price</Link>
+                    <br></br>
+                    <Outlet />
                 </>
             )}
         </ Container>
