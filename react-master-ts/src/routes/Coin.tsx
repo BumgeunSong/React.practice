@@ -89,6 +89,7 @@ export default function Coin() {
     const priceMatch = useMatch("/:coinId/price")
     const chartMatch = useMatch("/:coinId/chart")
 
+
     useEffect(() => {
         const fetchCoinInfo = async () => {
             const response = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`);
@@ -111,7 +112,10 @@ export default function Coin() {
         <Container>
             <Header>
                 <Title>
-                    <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfo?.symbol.toLowerCase()}`} />
+                    {coinInfo?.symbol ?
+                        <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfo?.symbol.toLowerCase()}`} /> 
+                        : <Img src="https://slxs.co.za/wp-content/uploads/2013/04/wallet_1.jpg" />
+                    }
                     {state?.name ?
                         state.name : loading ? "Loading..." : coinInfo?.name
                     }
