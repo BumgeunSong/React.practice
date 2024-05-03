@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Coin from "./Coin";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 const Title = styled.h1`
     font-size: 48px;
