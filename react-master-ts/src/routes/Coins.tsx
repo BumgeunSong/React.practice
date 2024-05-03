@@ -54,23 +54,28 @@ export interface ICoin {
 }
 
 function Coins() {
-    const { data } = useQuery<ICoin[]>('allCoins', fetchCoins)
+    const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins)
 
     return <Container>
         <Header>
             <Title>코인 목록</Title>
         </Header>
-        <CoinList>
-            {data?.map((coin) => (
-                <CoinItem key={coin.id}>
-                    <Link to={`/${coin.id}`} state={{ name: coin.name }}>
-                    <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}>
-                    </Img>
-                    {coin.name} &rarr;
-                    </Link> 
-                </CoinItem>
-            ))}
-        </CoinList>
+        {isLoading ? (
+            <p>Loading...</p>
+        ) : (
+            <CoinList>
+                {data?.map((coin) => (
+                    <CoinItem key={coin.id}>
+                        <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+                            <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}>
+                            </Img>
+                            {coin.name} &rarr;
+                        </Link>
+                    </CoinItem>
+                ))}
+            </CoinList>
+        )
+        }
     </Container>
 }
 
