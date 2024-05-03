@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Coin from "./Coin";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { fetchCoins } from "../Api";
 import { useQuery } from "react-query";
 
 const Title = styled.h1`
@@ -42,7 +43,7 @@ const Img = styled.img`
     margin-right: 10px;
 `
 
-interface CoinInterface {
+export interface ICoin {
     id: string,
     name: string,
     symbol: string,
@@ -53,21 +54,14 @@ interface CoinInterface {
 }
 
 function Coins() {
-    const [coins, setCoins] = useState<CoinInterface[]>([])
-    useEffect(() => {
-        (async () => {
-            const response = await fetch("https://api.coinpaprika.com/v1/coins");
-            const json = await response.json();
-            setCoins(json.slice(0, 20))
-        })();
-    }, [])
+    const { data } = useQuery<ICoin[]>('allCoins', fetchCoins)
 
     return <Container>
         <Header>
             <Title>코인 목록</Title>
         </Header>
         <CoinList>
-            {coins.map((coin) => (
+            {data?.map((coin) => (
                 <CoinItem key={coin.id}>
                     <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                     <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}>
