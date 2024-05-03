@@ -54,7 +54,9 @@ export interface ICoin {
 }
 
 function Coins() {
-    const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins)
+    const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins, {
+        select: (data) => data.slice(0, 20)
+    })
 
     return <Container>
         <Header>
