@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation, useMatch, useParams } from "react-router-dom
 import CoinInfoInterface from "./CoinInfoInterface";
 import styled from "styled-components";
 import { CoinPrice } from "./CoinPriceInterface";
+import { useQuery } from "react-query";
 
 interface RouterState {
     name: string;
@@ -78,33 +79,31 @@ const Tab = styled.span<{ isActive: boolean }>`
     }
 `
 
+async function fetchCoinInfo(coinId: string | undefined) {
+    const response = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`);
+    const json = await response.json();
+    return json
+}
+
 export default function Coin() {
     const [loading, setLoading] = useState(true)
     const { coinId } = useParams()
     const location = useLocation()
     const state = location.state as RouterState
 
-    const [coinInfo, setCoinInfo] = useState<CoinInfoInterface>()
     const [coinPrices, setCoinPrices] = useState<[CoinPrice]>()
     const priceMatch = useMatch("/:coinId/price")
     const chartMatch = useMatch("/:coinId/chart")
 
+    const { isLoading: isInfoLoading, data: coinInfoData } = useQuery<CoinInfoInterface>(["coinInfo", coinId], () => fetchCoinInfo(coinId))
 
     useEffect(() => {
-        const fetchCoinInfo = async () => {
-            const response = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`);
-            const json = await response.json();
-            setCoinInfo(json)
-            setLoading(false)
-        }
-
         const fetchCoinPrices = async () => {
             const reponse = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}/markets?quotes=KRW`);
             const json = await reponse.json();
             setCoinPrices(json.slice(0, 5))
         }
 
-        fetchCoinInfo()
         fetchCoinPrices()
     }, [coinId]) // coinID가 변하면 effect를 다시 호출
 
@@ -112,35 +111,35 @@ export default function Coin() {
         <Container>
             <Header>
                 <Title>
-                    {coinInfo?.symbol ?
-                        <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfo?.symbol.toLowerCase()}`} /> 
+                    {coinInfoData?.symbol ?
+                        <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfoData?.symbol.toLowerCase()}`} /> 
                         : <Img src="https://slxs.co.za/wp-content/uploads/2013/04/wallet_1.jpg" />
                     }
                     {state?.name ?
-                        state.name : loading ? "Loading..." : coinInfo?.name
+                        state.name : isInfoLoading ? "Loading..." : coinInfoData?.name
                     }
                 </Title>
             </Header>
-            {loading ? (
+            {isInfoLoading ? (
                 <Loader>Loading...</Loader>
             ) : (
                 <>
                     <Overview>
                         <OverviewItem>
                             <span>Rank of Coin</span>
-                            <span>{coinInfo?.rank}</span>
+                            <span>{coinInfoData?.rank}</span>
                         </OverviewItem>
                         <OverviewItem>
                             <span>Symbol</span>
-                            <span>{coinInfo?.symbol}</span>
+                            <span>{coinInfoData?.symbol}</span>
                         </OverviewItem>
                         <OverviewItem>
                             <span>Started At</span>
-                            <span>{dateOnlyString(coinInfo?.started_at)}</span>
+                            <span>{dateOnlyString(coinInfoData?.started_at)}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>
-                        {coinInfo?.description}
+                        {coinInfoData?.description}
                     </Description>
                     {coinPrices?.map((coinPrice) => (
                         <Overview>
