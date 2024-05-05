@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CoinPrice } from "./CoinPriceInterface";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinPrices } from "../Api";
+import { Overview, OverviewItem } from "./Overview";
 
 interface RouterState {
     name: string;
@@ -29,26 +30,6 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const Overview = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-top: 16px;
-  margin-bottom: 16px;
-`;
-const OverviewItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  span:first-child {
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-`;
 const Description = styled.p`
   margin: 20px 0px;
 `;
@@ -83,13 +64,10 @@ export default function Coin() {
     const { coinId } = useParams()
     const state = useLocation().state as RouterState
 
-    const priceMatch = useMatch("/:coinId/price")
+    const priceMatch = useMatch("/:coinId/prices")
     const chartMatch = useMatch("/:coinId/chart")
 
     const { isLoading: isInfoLoading, data: coinInfoData } = useQuery<CoinInfoInterface>(["coinInfo", coinId], () => fetchCoinInfo(coinId))
-    const { data: coinPriceData } = useQuery<CoinPrice[]>(["coinPrices", coinId], () => fetchCoinPrices(coinId), {
-        select: (data) => data.slice(0,5)
-    })
 
     return (
         <Container>
@@ -138,29 +116,6 @@ export default function Coin() {
                 </Tabs>
                 <br></br>
                 <Outlet />
-            </>
-            <>
-                {coinPriceData !== undefined ? (
-                    coinPriceData.map((coinPrice) => (
-                        <Overview>
-                            <OverviewItem>
-                                <span>Exchange</span>
-                                <span>{coinPrice?.exchange_name}</span>
-                            </OverviewItem>
-                            <OverviewItem>
-                                <span>Price</span>
-                                <span>{coinPrice?.quotes.KRW.price.toFixed(0)} KRW</span>
-                            </OverviewItem>
-                            <OverviewItem>
-                                <span>24H Volume</span>
-                                <span>{coinPrice?.adjusted_volume_24h_share.toFixed(3)}</span>
-                            </OverviewItem>
-                        </Overview>
-                    ))
-                ) : (
-                    <></>
-                )
-                }
             </>
         </ Container >
     )

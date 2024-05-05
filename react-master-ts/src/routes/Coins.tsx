@@ -66,7 +66,7 @@ function Coins() {
             <CoinList>
                 {data?.map((coin) => (
                     <CoinItem key={coin.id}>
-                        <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+                        <Link to={`/${coin.id}/prices`} state={{ name: coin.name }}>
                             <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}>
                             </Img>
                             {coin.name} &rarr;
