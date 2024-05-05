@@ -111,7 +111,7 @@ export default function Coin() {
                         <Link to={`/${coinId}/chart`}>Chart</Link>
                     </Tab>
                     <Tab isActive={priceMatch !== null}>
-                        <Link to={`/${coinId}/price`}>Price</Link>
+                        <Link to={`/${coinId}/prices`}>Price</Link>
                     </Tab>
                 </Tabs>
                 <br></br>
