@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import styled from "styled-components";
 import { fetchCoinHistory } from "../Api";
 import { useParams } from "react-router-dom";
+import Chart from "react-apexcharts";
 
 // Define the ICoinPriceHistory interface
 interface ICoinPriceHistory {
@@ -49,6 +50,23 @@ function PriceChart() {
         });
     }
 
+    var options = {
+        chart: {
+            id: "line"
+        },
+        xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+        }
+    }
+
+    const series = [
+        {
+            name: "series-1",
+            data: [30, 40, 45, 50, 49, 60, 70, 91]
+        }
+    ]
+
+
     return (
         <ChartContainer>
             <ChartTitle>Price Chart</ChartTitle>
@@ -59,6 +77,12 @@ function PriceChart() {
                     {data?.map((priceData) => (
                         <p>{priceData.close}</p>
                     ))}
+                    <Chart
+                        options={options}
+                        series={series}
+                        type="line"
+                        width="500"
+                    />
                 </ChartWrapper>
             )}
         </ChartContainer>
