@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useMatch, useParams } from "react-router-dom"
 import CoinInfoInterface from "./CoinInfoInterface";
 import styled from "styled-components";
@@ -82,14 +81,13 @@ const Tab = styled.span<{ isActive: boolean }>`
 
 export default function Coin() {
     const { coinId } = useParams()
-    const location = useLocation()
-    const state = location.state as RouterState
+    const state = useLocation().state as RouterState
 
     const priceMatch = useMatch("/:coinId/price")
     const chartMatch = useMatch("/:coinId/chart")
 
     const { isLoading: isInfoLoading, data: coinInfoData } = useQuery<CoinInfoInterface>(["coinInfo", coinId], () => fetchCoinInfo(coinId))
-    const { isLoading: isPriceLoading, data: coinPriceData } = useQuery<CoinPrice[]>(["coinPrices", coinId], () => fetchCoinPrices(coinId), {
+    const { data: coinPriceData } = useQuery<CoinPrice[]>(["coinPrices", coinId], () => fetchCoinPrices(coinId), {
         select: (data) => data.slice(0,5)
     })
 
@@ -142,7 +140,7 @@ export default function Coin() {
                 <Outlet />
             </>
             <>
-                {coinPriceData != undefined ? (
+                {coinPriceData !== undefined ? (
                     coinPriceData.map((coinPrice) => (
                         <Overview>
                             <OverviewItem>
