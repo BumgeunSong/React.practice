@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { fetchCoinHistory } from "../Api";
 import { useParams } from "react-router-dom";
 import Chart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 
 // Define the ICoinPriceHistory interface
 interface ICoinPriceHistory {
@@ -29,43 +30,66 @@ const ChartTitle = styled.h2`
 `;
 
 const ChartWrapper = styled.div`
-    border: 1px solid ${props => props.theme.secondary};
     padding: 20px;
     margin-top: 16px;
 `;
+
+interface IPriceOnClose {
+    date: string;
+    price: number;
+}
+
+function dateStringFromUTCTimestamp(timestamp: number) {
+    const date = new Date(Number(timestamp) * 1000)
+    return `${(date.getUTCMonth() + 1).toString().padStart(2, '0')}-${(date.getUTCDate()).toString().padStart(2, '0')}`
+}
 
 function PriceChart() {
     const { coinId } = useParams()
     const { isLoading, data } = useQuery<ICoinPriceHistory[]>(["history", coinId], () => fetchCoinHistory(coinId))
 
-    // Calculate max and min prices
-    let maxPrice = 0;
-    let minPrice = Number.MAX_VALUE;
+    let closeDate = data?.map((coinPriceHistory) => {
+        return dateStringFromUTCTimestamp(coinPriceHistory.time_close)
+    }) ?? []
 
-    if (data) {
-        data.forEach((priceData) => {
-            const price = parseFloat(priceData.close);
-            if (price > maxPrice) maxPrice = price;
-            if (price < minPrice) minPrice = price;
-        });
-    }
+    let closePrice = data?.map((coinPriceHistory) => {
+        return Number(coinPriceHistory.close)
+    }) ?? []
 
-    var options = {
+    var options: ApexOptions = {
         chart: {
             id: "line"
         },
         xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
+            categories: closeDate,
+            labels: {
+                style: {
+                    colors: "#EEEEEE"
+                }
+            }
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: "#EEEEEE"
+                }
+            }
+        },
+        title: {
+            text: 'Recent price',
+            style: {
+                color: "#EEEEEE"
+            }
+        },
+        colors: ["#00ADB5", "#222831"]
     }
 
     const series = [
         {
-            name: "series-1",
-            data: [30, 40, 45, 50, 49, 60, 70, 91]
+            name: "close Price",
+            data: closePrice
         }
     ]
-
 
     return (
         <ChartContainer>
@@ -74,14 +98,10 @@ function PriceChart() {
                 <p>Loading...</p>
             ) : (
                 <ChartWrapper>
-                    {data?.map((priceData) => (
-                        <p>{priceData.close}</p>
-                    ))}
                     <Chart
                         options={options}
                         series={series}
                         type="line"
-                        width="500"
                     />
                 </ChartWrapper>
             )}
