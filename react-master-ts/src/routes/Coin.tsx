@@ -5,6 +5,8 @@ import { useQuery } from "react-query";
 import { fetchCoinInfo } from "../Api";
 import { Overview, OverviewItem } from "./Overview";
 import { Tab, Tabs } from "../Tap";
+import ToggleSwitch from "./ToggleSwitch";
+import { isDarkModeState } from "../atoms";
 
 interface RouterState {
     name: string;
@@ -61,6 +63,7 @@ export default function Coin() {
                         state.name : isInfoLoading ? "Loading..." : coinInfoData?.name
                     }
                 </Title>
+                <ToggleSwitch toggleState={isDarkModeState}/>
             </Header>
             {isInfoLoading ? (
                 <Loader>Loading...</Loader>

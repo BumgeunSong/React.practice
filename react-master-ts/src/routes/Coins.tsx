@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { fetchCoins } from "../Api";
 import { useQuery } from "react-query";
+import ToggleSwitch from "./ToggleSwitch";
+import { isDarkModeState } from "../atoms";
 
 const Title = styled.h1`
     font-size: 48px;
@@ -60,6 +62,7 @@ function Coins() {
     return <Container>
         <Header>
             <Title>코인 목록</Title>
+            <ToggleSwitch toggleState={isDarkModeState}/>
         </Header>
         {isLoading ? (
             <p>Loading...</p>

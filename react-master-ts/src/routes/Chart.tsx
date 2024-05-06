@@ -5,6 +5,8 @@ import { fetchCoinHistory } from "../Api";
 import { useParams } from "react-router-dom";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { useRecoilValue } from "recoil";
+import { isDarkModeState } from "../atoms";
 
 // Define the ICoinPriceHistory interface
 interface ICoinPriceHistory {
@@ -42,6 +44,7 @@ function dateStringFromUTCTimestamp(timestamp: number) {
 function PriceChart() {
     const { coinId } = useParams()
     const { isLoading, data } = useQuery<ICoinPriceHistory[]>(["history", coinId], () => fetchCoinHistory(coinId))
+    const isDarkMode = useRecoilValue(isDarkModeState)
 
     let closeDate = data?.map((coinPriceHistory) => {
         return dateStringFromUTCTimestamp(coinPriceHistory.time_close)
@@ -56,7 +59,7 @@ function PriceChart() {
             id: "line"
         },
         theme: {
-            mode: "dark"
+            mode: isDarkMode ? "dark" : "light"
         },
         xaxis: {
             categories: closeDate,
