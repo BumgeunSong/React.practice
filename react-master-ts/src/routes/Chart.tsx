@@ -34,11 +34,6 @@ const ChartWrapper = styled.div`
     margin-top: 16px;
 `;
 
-interface IPriceOnClose {
-    date: string;
-    price: number;
-}
-
 function dateStringFromUTCTimestamp(timestamp: number) {
     const date = new Date(Number(timestamp) * 1000)
     return `${(date.getUTCMonth() + 1).toString().padStart(2, '0')}-${(date.getUTCDate()).toString().padStart(2, '0')}`

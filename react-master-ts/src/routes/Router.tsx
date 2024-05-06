@@ -1,10 +1,9 @@
-import { RouterProvider, createBrowserRouter, useSearchParams } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Coins from "./Coins";
 import Coin from "./Coin";
 import Chart from "./Chart";
-import Price from "./Prices";
 import Prices from "./Prices";
-import { fetchCoinHistory, fetchCoinPrices } from "../Api";
+import { fetchCoinPrices } from "../Api";
 
 const router = createBrowserRouter([
     {

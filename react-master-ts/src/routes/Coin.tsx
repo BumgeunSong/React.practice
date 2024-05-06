@@ -1,9 +1,8 @@
 import { Link, Outlet, useLocation, useMatch, useParams } from "react-router-dom"
 import CoinInfoInterface from "./CoinInfoInterface";
 import styled from "styled-components";
-import { CoinPrice } from "./CoinPriceInterface";
 import { useQuery } from "react-query";
-import { fetchCoinInfo, fetchCoinPrices } from "../Api";
+import { fetchCoinInfo } from "../Api";
 import { Overview, OverviewItem } from "./Overview";
 
 interface RouterState {
