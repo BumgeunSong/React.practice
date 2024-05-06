@@ -6,13 +6,10 @@ import GlobalStyle from './GlobalStyle';
 import { useState } from 'react';
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const toggleDarkMode = () => setIsDark((current) => !current)
   return (
     <>
       <QueryClientProvider client={new QueryClient()}>
-        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-          <button onClick={toggleDarkMode}>Toggle Mode</button>
+        <ThemeProvider theme={darkTheme}>
           <GlobalStyle />
           <Router />
         </ThemeProvider>

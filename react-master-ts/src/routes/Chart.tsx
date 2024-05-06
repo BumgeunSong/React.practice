@@ -55,6 +55,9 @@ function PriceChart() {
         chart: {
             id: "line"
         },
+        theme: {
+            mode: "dark"
+        },
         xaxis: {
             categories: closeDate,
             labels: {
