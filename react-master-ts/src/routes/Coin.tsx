@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useQuery } from "react-query";
 import { fetchCoinInfo } from "../Api";
 import { Overview, OverviewItem } from "./Overview";
+import { Tab, Tabs } from "../Tap";
 
 interface RouterState {
     name: string;
@@ -37,26 +38,6 @@ const Img = styled.img`
     width: 35px;
     height: 35px;
     margin-right: 16px;
-`
-
-const Tabs = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin: 24px 0px;
-    gap: 8px;
-`
-
-const Tab = styled.span<{ isActive: boolean }>`
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 12px;
-    background-color: ${props => props.isActive ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)"};
-    padding: 8px 0px;
-    border-radius: 8px;
-
-    a {
-        display: block;
-    }
 `
 
 export default function Coin() {

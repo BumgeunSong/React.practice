@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.primary50}; // #EEEEEE
+  color: ${props => props.theme.background};
   padding: 10px 20px;
   border-radius: 10px;
   margin-top: 16px;

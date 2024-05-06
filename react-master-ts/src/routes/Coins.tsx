@@ -21,6 +21,7 @@ const CoinItem = styled.li`
     margin-bottom: 16px;
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
+    border: 1px solid white;
     border-radius: 16px;
     a {
         padding: 16px;
