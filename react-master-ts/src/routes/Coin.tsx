@@ -54,6 +54,7 @@ export default function Coin() {
     return (
         <Container>
             <Header>
+                <ToggleSwitch toggleState={isDarkModeState} />
                 <Title>
                     {coinInfoData?.symbol ?
                         <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfoData?.symbol.toLowerCase()}`} />
@@ -63,7 +64,6 @@ export default function Coin() {
                         state.name : isInfoLoading ? "Loading..." : coinInfoData?.name
                     }
                 </Title>
-                <ToggleSwitch toggleState={isDarkModeState}/>
             </Header>
             {isInfoLoading ? (
                 <Loader>Loading...</Loader>
