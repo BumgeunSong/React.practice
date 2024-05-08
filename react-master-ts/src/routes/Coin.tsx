@@ -5,8 +5,8 @@ import { useQuery } from "react-query";
 import { fetchCoinInfo } from "../Api";
 import { Overview, OverviewItem } from "./Overview";
 import { Tab, Tabs } from "../Tap";
-import ToggleSwitch from "./ToggleSwitch";
 import { isDarkModeState } from "../atoms";
+import ToggleSwitchHeader from "./ToggleSwitch";
 
 interface RouterState {
     name: string;
@@ -29,7 +29,7 @@ const Header = styled.header`
   height: 15vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
 `;
 
 const Description = styled.p`
@@ -54,7 +54,7 @@ export default function Coin() {
     return (
         <Container>
             <Header>
-                <ToggleSwitch toggleState={isDarkModeState} />
+                <ToggleSwitchHeader toggleState={isDarkModeState} />
                 <Title>
                     {coinInfoData?.symbol ?
                         <Img src={`https://cryptoicon-api.pages.dev/api/icon/${coinInfoData?.symbol.toLowerCase()}`} />

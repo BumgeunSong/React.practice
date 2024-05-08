@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { fetchCoins } from "../Api";
 import { useQuery } from "react-query";
-import ToggleSwitch from "./ToggleSwitch";
+import ToggleSwitchHeader from "./ToggleSwitch";
 import { isDarkModeState } from "../atoms";
-import { useRecoilValue } from "recoil";
 
 const Title = styled.h1`
     font-size: 48px;
@@ -39,18 +38,6 @@ const CoinItem = styled.li`
   }
 `
 
-const ModeSwitchContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: right;
-`
-
-const ModeSwitchLabel = styled.span`
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 16px;
-`
-
 const Img = styled.img`
     width: 35px;
     height: 35px;
@@ -74,10 +61,7 @@ function Coins() {
  
     return <Container>
         <Header>
-            <ModeSwitchContainer>
-                <ModeSwitchLabel>{useRecoilValue(isDarkModeState) ? "Dark Mode" : "Light Mode"}</ ModeSwitchLabel>
-                <ToggleSwitch toggleState={isDarkModeState} />
-            </ModeSwitchContainer>
+            <ToggleSwitchHeader toggleState={isDarkModeState} />
             <Title>코인 목록</Title>
         </Header>
         {isLoading ? (

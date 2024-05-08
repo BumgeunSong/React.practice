@@ -1,4 +1,4 @@
-import { RecoilState, useRecoilState } from 'recoil';
+import { RecoilState, useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const ToggleContainer = styled.div`
@@ -33,6 +33,18 @@ const Switch = styled.div<{ isToggled: boolean }>`
   }
 `;
 
+const ModeSwitchContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: right;
+`
+
+const ModeSwitchLabel = styled.span`
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 16px;
+`
+
 interface ToggleSwitchProps {
   toggleState: RecoilState<boolean>
 }
@@ -47,9 +59,18 @@ function ToggleSwitch({ toggleState }: ToggleSwitchProps) {
 
   return (
     <ToggleContainer>
-        <Switch isToggled={isOn} onClick={handleToggle} />
+      <Switch isToggled={isOn} onClick={handleToggle} />
     </ToggleContainer>
   );
 };
 
-export default ToggleSwitch;
+function ToggleSwitchHeader({ toggleState }: ToggleSwitchProps) {
+  return (
+    <ModeSwitchContainer>
+      <ModeSwitchLabel>{useRecoilValue(toggleState) ? "Dark Mode" : "Light Mode"}</ ModeSwitchLabel>
+      <ToggleSwitch toggleState={toggleState} />
+    </ModeSwitchContainer>
+  )
+}
+
+export default ToggleSwitchHeader;
