@@ -50,13 +50,12 @@ function PriceChart() {
         return dateStringFromUTCTimestamp(coinPriceHistory.time_close)
     }) ?? []
 
-    let closePrice = data?.map((coinPriceHistory) => {
-        return Number(coinPriceHistory.close)
-    }) ?? []
+    // Convert the data to candlestick format
+    const candlestickData = data ? convertToCandlestickData(data) : [];
 
     var options: ApexOptions = {
         chart: {
-            id: "line"
+            id: "candlestick"
         },
         theme: {
             mode: isDarkMode ? "dark" : "light"
@@ -88,7 +87,7 @@ function PriceChart() {
     const series = [
         {
             name: "close Price",
-            data: closePrice
+            data: candlestickData
         }
     ]
 
@@ -102,12 +101,24 @@ function PriceChart() {
                     <Chart
                         options={options}
                         series={series}
-                        type="line"
+                        type="candlestick"
                     />
                 </ChartWrapper>
             )}
         </ChartContainer>
     );
 }
+
+const convertToCandlestickData = (data: ICoinPriceHistory[]): [number, [number, number, number, number]][] => {
+    return data.map((item) => [
+        item.time_open, // Timestamp
+        [
+            parseFloat(item.open), // Open
+            parseFloat(item.high), // High
+            parseFloat(item.low), // Low
+            parseFloat(item.close), // Close
+        ],
+    ]);
+};
 
 export default PriceChart;
