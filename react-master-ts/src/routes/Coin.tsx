@@ -7,6 +7,7 @@ import { Overview, OverviewItem } from "./Overview";
 import { Tab, Tabs } from "../Tap";
 import { isDarkModeState } from "../atoms";
 import ToggleSwitchHeader from "./ToggleSwitch";
+import BackButtonComponent from "./BackButton";
 
 interface RouterState {
     name: string;
@@ -54,6 +55,7 @@ export default function Coin() {
     return (
         <Container>
             <Header>
+                <BackButtonComponent linkTo="/" />
                 <ToggleSwitchHeader toggleState={isDarkModeState} />
                 <Title>
                     {coinInfoData?.symbol ?
